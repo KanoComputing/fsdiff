@@ -1,9 +1,9 @@
 #!/usr/binenv python3
 
-# Copyright (C) 2018 Kano Computing Ltd.
+# Copyright (C) 2018 Ioannis Valasakis <code@wizofe.uk>
 # License: http://www.gnu.org/licenses/gpl-2.0.txt GNU GPL v2
 
-__version__ = "0.3"
+__version__ = "0.3-wizofe"
 
 import argparse
 from fsdiff.main import main

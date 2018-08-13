@@ -1,4 +1,4 @@
-# Copyright (C) 2018 Kano Computing Ltd.
+# Copyright (C) 2018Ioannis Valasakis <code@wizofe.uk>
 # License: http://www.gnu.org/licenses/gpl-2.0.txt GNU GPL v2
 
 import os
