@@ -11,7 +11,7 @@ with open('README.md', 'r') as fh:
 
 setup(
     name='fsdiff',
-    version='0.2.post3',
+    version='0.3',
     description='Byte to byte comparison of local disk images or filesystems',
     long_description = long_description,
     long_description_content_type = "text/markdown",
@@ -22,5 +22,7 @@ setup(
     scripts=['bin/fsdiff'],
     install_requires=[
         "colorama"
-    ]
+    ],
+    platforms = 'POSIX',
+    license = 'GNU GPL v2.0'
 )

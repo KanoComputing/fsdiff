@@ -3,7 +3,7 @@
 # Copyright (C) 2018 Kano Computing Ltd.
 # License: http://www.gnu.org/licenses/gpl-2.0.txt GNU GPL v2
 
-__version__ = "0.2.post3"
+__version__ = "0.3"
 
 import argparse
 from fsdiff.main import main
