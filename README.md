@@ -11,16 +11,19 @@ It can mount and compare two images locally or it can just compare two filesyste
 
 fsdiff is a very simple tool used to compare recursively the filesystem directory and file structure.
 It does not only perform a quick (shallow) comparison using `os.stat` (stat system call), it also compares 
-the contents of the files. In case they differ, it displays a brief summary report. It is also installed
+the contents of the files. 
+
+In case they differ, it displays a brief summary report. It is also installed
 as a Python packaged, so it can be used likewise.
 
 Example run:
 `fsdiff ./fs1 ./fs2`
 
-In case a more detailed investigation of the file differences needs to be performed, it's suggested to use
-a deep checking tool like diffoscope or Beyond Compare, if a GUI is preffered.
+For a more detailed investigation  a deep checking tool like 
+diffoscope or Beyond Compare, may be used.
 
-To install you need to `pip install -e .` and then run the `bin/fsdiff`.
+To install you need to run `pip3 install fsdiff`, with either super
+user privileges or with the `--user` flag.
 
 Note: Python 3.x is required, a few new language features are used, like `subprocess.run` method as well as the cache
  clearing from the directory compare library. It also needs to be run with super user privileges.

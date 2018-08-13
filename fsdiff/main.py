@@ -10,6 +10,7 @@ import subprocess as s
 import ctypes
 from ctypes import cdll
 from ctypes.util import find_library
+from colorama import init, Fore, Back, Style
 
 
 def mount(img, loc, off='1979711488'):
@@ -97,7 +98,21 @@ def is_same(dir1, dir2):
     return True
 
 
-def main(loc1, loc2):
+def colorp(text, foreground="black", background="white"):
+    """
+    :param text: the string to display to stdout
+    :param foreground: color
+    :param background: color
+    :return:
+    """
+    init()  # initialize colorama
+    fground = foreground.upper()
+    bground = background.upper()
+    style = getattr(Fore, fground) + getattr(Back, bground)
+    print(style + text + Style.RESET_ALL)
+
+
+def main(loc1: object, loc2: object) -> bool:
     """
     The simplest user case by calling is_same()
     :param loc1: the left side path to compare from
@@ -111,9 +126,11 @@ def main(loc1, loc2):
 
     if os.path.exists(loc1):
         if os.path.exists(loc2):
-            print('Is the dir structure the same?', is_same(loc1, loc2))
+            ret = is_same(loc1, loc2)
+            colorp("LOCATIONS SIMILAR" if ret == True else "LOCATIONS DIFFER", "green" if ret == True else "red",
+                   "white")
+            return ret
         else:
             print('Directory {} doesn\'t exist'.format(loc2))
     else:
         print('Directory {} doesn\'t exist'.format(loc1))
-
