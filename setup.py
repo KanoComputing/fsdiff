@@ -11,18 +11,19 @@ with open('README.md', 'r') as fh:
 
 setup(
     name='fsdiff',
-    version='0.3-wizofe',
+    version='0.4.3',
     description='Byte to byte comparison of local disk images or filesystems',
-    long_description = long_description,
-    long_description_content_type = "text/markdown",
+    long_description=long_description,
+    long_description_content_type="text/markdown",
     author='Ioannis Valasakis',
     author_email='code@wizofe.uk',
     url='https://github.com/wizofe/fsdiff',
+    python_requires='>=3.0',
     packages=['fsdiff'],
     scripts=['bin/fsdiff'],
     install_requires=[
         "colorama"
     ],
-    platforms = 'POSIX',
-    license = 'GNU GPL v2.0'
+    platforms='POSIX',
+    license='GNU GPL v2'
 )

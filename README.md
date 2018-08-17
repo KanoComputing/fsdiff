@@ -5,7 +5,7 @@ It can mount and compare two images locally or it can just compare two filesyste
 
 # SYNOPSIS
 
-`fsdiff [-h] [-v] [--fs-from PATH_FS1] [--fs-to PATH_FS2]`
+`fsdiff [-h] [-v --version] [-x] [-i --img] [from] [to]`
 
 # DESCRIPTION
 
@@ -17,7 +17,7 @@ In case they differ, it displays a brief summary report. It is also installed
 as a Python packaged, so it can be used likewise.
 
 Example run:
-`fsdiff ./fs1 ./fs2`
+`sudo fsdiff rootfs bootfs`
 
 For a more detailed investigation  a deep checking tool like 
 diffoscope or Beyond Compare, may be used.
@@ -33,10 +33,14 @@ Note: Python 3.x is required, a few new language features are used, like `subpro
 ```
 -h
 : Displays a help message
---version
+-v, --version
 : Shows the current version
---fromfs
-: The left side filesystem to be compared 
---tofs
-: The right side filesystem to perform the comparison with
+-x
+: Extracts an image if it's compressed
+-i, --img
+: Sets the comparison type to image (img)
+from
+: The location of the path (image) to compare from 
+to
+: The location of the path (image) to compare against
 ```

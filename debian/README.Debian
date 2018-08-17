@@ -3,4 +3,4 @@ fsdiff for Debian
 Simple command line tool to compare in depth between two different
 filesystems or images.
 
- -- Team Kano <dev@kano.me>  Mon, 13 Aug 2018 08:50:22 +0000
+ -- Ioannis Valasakis <code@wizofe.uk>  Mon, 13 Aug 2018 08:50:22 +0000

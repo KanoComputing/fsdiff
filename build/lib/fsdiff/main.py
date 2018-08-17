@@ -148,18 +148,16 @@ def is_same(path1, path2, verbose=False):
     :param path2: Right path to compare with
     :rtype True is they are the same or False if they differ
     """
-    # Clear the file structure cache
-    # filecmp.is_cache()
     compared = dircmp(path1, path2)
 
     if (compared.left_only or compared.right_only or compared.diff_files
             or compared.funny_files):
         # Displays a summary report if differences are found
-        print('Files that differ: {}'
-              'Files only in {}: {}'
-              'Files only in {}: {}'.format(compared.diff_files, path1,
-                                            compared.left_only, path2,
-                                            compared.right_only))
+        print('Files that differ: {}\n'
+              'Files only in {}: {}\n'
+              'Files only in {}: {}\n'.format(compared.diff_files, path1,
+                                              compared.left_only, path2,
+                                              compared.right_only))
         if verbose:
             compared.report_full_closure()
         return False

@@ -1,7 +1,7 @@
 Source: fsdiff
 Section: devel
 Priority: extra
-Maintainer: Team Kano <dev@kano.me>
+Maintainer: Ioannis Valasakis <code@wizofe.uk>
 Build-Depends: debhelper (>=9), dh-python, python3-all, python3-colorama, python3-setuptools, python3
 Standards-Version: 3.9.8
 Homepage: <insert the upstream URL, if relevant>
