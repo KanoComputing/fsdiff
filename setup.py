@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# Copyright (C) 2018 KANO Computing <dev@kano.me>
+# Copyright (C) 2018 Ioannis Valasakis <code@wizofe.uk>
 # License: http://www.gnu.org/licenses/gpl-2.0.txt GNU GPL v2
 
 
@@ -15,8 +15,8 @@ setup(
     description='Byte to byte comparison of local disk images or filesystems',
     long_description=long_description,
     long_description_content_type="text/markdown",
-    author='KANO Computing',
-    author_email='dev@kano.me',
+    author='Ioannis Valasakis',
+    author_email='code@wizofe.uk',
     url='https://github.com/KanoComputing/fsdiff',
     python_requires='>=3.0',
     packages=['fsdiff'],
