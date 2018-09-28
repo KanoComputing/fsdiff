@@ -1,26 +1,28 @@
 #!/usr/bin/env python3
 
 # Copyright (C) 2018 Ioannis Valasakis <code@wizofe.uk>
-# License: http://www.gnu.org/licenses/gpl-2.0.txt GNU GPL v2
-
+# Licensed under the GNU GPL-3
+# The GNU Public License can be found in `/usr/share/common-licenses/GPL-3'.
 
 from setuptools import setup
+from os import path
 
 with open('README.md', 'r') as fh:
     long_description = fh.read()
 
 setup(
     name='fsdiff',
-    version='0.4.3',
-    description='Byte to byte comparison of local disk images or filesystems',
+    version='0.9',
+    description='fsdiff - cli tool to compare two filesystems or images',
     long_description=long_description,
     long_description_content_type="text/markdown",
-    author='Ioannis Valasakis',
-    author_email='code@wizofe.uk',
+    author='Kano Dev Team',
+    author_email='dev@kano.me',
     url='https://github.com/KanoComputing/fsdiff',
     python_requires='>=3.0',
     packages=['fsdiff'],
     scripts=['bin/fsdiff'],
+    data_files=[(path.join('share', 'man', 'man1'), ['man/fsdiff.1'])],
     install_requires=[
         "colorama"
     ],

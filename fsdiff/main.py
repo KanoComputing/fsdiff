@@ -1,10 +1,12 @@
-# Copyright (C) 2018 Ioannis Valasakis <code@wizofe.uk>
-# License: http://www.gnu.org/licenses/gpl-2.0.txt GNU GPL v2
+# Copyright (C) 2018 Kano Dev Team <dev@kano.me>
+# Licensed under the GNU GPL-3
+# The GNU Public License can be found in `/usr/share/common-licenses/GPL-3'.
 
 import os
 import sys
 import time
 import filecmp
+from filecmp import dircmp
 import os.path
 import shutil
 from subprocess import Popen, PIPE
@@ -29,7 +31,7 @@ ROOT_NB_SUFFIX = 'p7'
 def load_c_library():
     """
     Loads the libc from the system to use for different calls
-    like mount, etc
+    like mount, et
     """
     try:
         libc_name = find_library('c')
@@ -99,7 +101,7 @@ def mount_noobs(img):
 
 def unmount_image(path, device_name, noobs=False):
     """
-    Unmounts an image (support both NOOBS and normal images)
+    Unmounts an image (support both NOOBS and dd'ed images)
     :param device_name: The system device to unmount
     :param path: The image to be unmounted
     :rtype: True for success, False otherwise
@@ -122,23 +124,35 @@ def unmount_image(path, device_name, noobs=False):
         return False
 
 
-class dircmp(filecmp.dircmp):
-    """ Comparison between contents of the files of dir1 and dir2 within the same path.
+# class dircmp(filecmp.dircmp):
+#     """ Comparison between contents of the files of dir1 and dir2 within the same path.
+#     """
+
+#     def phase3(self):
+#         """
+#             Discover the differences between common files and ensure that
+#             we are using content comparison with shallow=False in contrast
+#             with the original compare phase3 implementation.
+
+#             It does an in depth comparison of contents and doesn't rely only on os.stat() attributes
+
+#             Refer to Lib/filecmp.py of cpython
+#             """
+#         fcomp = filecmp.cmpfiles(self.left, self.right, self.common_files,
+#                                  shallow=False)
+#         self.same_files, self.diff_files, self.funny_files = fcomp
+
+
+def get_files(rootdir):
     """
-
-    def phase3(self):
-        """
-            Discover the differences between common files and ensure that
-            we are using content comparison with shallow=False in contrast
-            with the original compare phase3 implementation.
-
-            It does an in depth comparison of contents and doesn't rely only on os.stat() attributes
-
-            Refer to Lib/filecmp.py of cpython
-            """
-        fcomp = filecmp.cmpfiles(self.left, self.right, self.common_files,
-                                 shallow=False)
-        self.same_files, self.diff_files, self.funny_files = fcomp
+    Get the files by 'walking' recursively beginning on the rootdir
+    :param rootdir: the base dir; starting point
+    :return: the pathname for each of the files (minus the prefix)
+    """
+    for rootname, dirs, files in os.walk(rootdir):
+        for file in files:
+            path = os.path.join(rootname, file)
+            yield path[len(rootdir):]
 
 
 def is_same(path1, path2, verbose=False):
@@ -149,24 +163,24 @@ def is_same(path1, path2, verbose=False):
     :rtype True is they are the same or False if they differ
     """
     # Clear the file structure cache
-    # filecmp.is_cache()
+    filecmp.clear_cache()
     compared = dircmp(path1, path2)
 
     if (compared.left_only or compared.right_only or compared.diff_files
-            or compared.funny_files):
+        or compared.funny_files):
         # Displays a summary report if differences are found
-        print('Files that differ: {}'
-              'Files only in {}: {}'
-              'Files only in {}: {}'.format(compared.diff_files, path1,
-                                            compared.left_only, path2,
-                                            compared.right_only))
         if verbose:
-            compared.report_full_closure()
-        return False
-    for subdir in compared.common_dirs:
-        if not is_same(os.path.join(path1, subdir), os.path.join(path2, subdir)):
+            compared.report_partial_closure()
             return False
-    return True
+        else:
+            print('Files that differ: {}\n'.format(compared.diff_files))
+            print('Files only in {}: {}\n'.format(path1, compared.left_only))
+            print('Files only in {}: {}\n'.format(path2, compared.right_only))
+            return False
+        for subdir in compared.common_dirs:
+            if not is_same(os.path.join(path1, subdir), os.path.join(path2, subdir)):
+                return False
+            return True
 
 
 def colorp(text, foreground="black", background="white"):
@@ -185,7 +199,7 @@ def colorp(text, foreground="black", background="white"):
 
 def is_same_display(from_loc, to_loc, verbose):
     ret = is_same(from_loc, to_loc, verbose)
-    colorp("LOCATIONS {} and {} are SIMILAR".format(from_loc, to_loc) if ret else "LOCATIONS DIFFER",
+    colorp("LOCATIONS {} and {} are the SAME!".format(from_loc, to_loc) if ret else "LOCATIONS DIFFER",
            "green" if ret else "red",
            "white")
     return ret
@@ -239,3 +253,4 @@ def main(from_loc, to_loc, image, extract, verbose):
 
         is_same_display(from_loc, to_loc, verbose)
         sys.exit(0)
+
