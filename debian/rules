@@ -1,5 +1,0 @@
-#!/usr/bin/make -f
-export PYBUILD_DESTDIR=debian/fsdiff
-
-%:
-	dh $@ --with python3 --buildsystem=pybuild

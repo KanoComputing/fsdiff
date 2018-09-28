@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 
 # Copyright (C) 2018 Ioannis Valasakis <code@wizofe.uk>
-# License: http://www.gnu.org/licenses/gpl-2.0.txt GNU GPL v2
+# Licensed under the GNU GPL-3
+# The GNU Public License can be found in `/usr/share/common-licenses/GPL-3'.
 
 # Debian Package Version
-__version__ = "0.4.1"
+__version__ = "0.9"
 
 import argparse
 from fsdiff.main import main
